@@ -1,0 +1,5 @@
+name: 'shfmt'
+description: 'Runs shfmt in check mode to see if shell files are formatted consistently'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
