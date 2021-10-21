@@ -1,0 +1,14 @@
+name: yapf
+
+on:
+  workflow_call:
+
+jobs:
+  yapf:
+    name: 'yapf'
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: yapf
+        uses: AlexanderMelde/yapf-action@v1.0
