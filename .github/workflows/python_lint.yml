@@ -1,0 +1,51 @@
+name: python linting
+
+on:
+  workflow_call:
+    inputs:
+      python_version:
+        required: true
+        type: string
+
+jobs:
+  python_linting:
+    name: python linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: flake8
+        uses: py-actions/flake8@v2
+        with:
+          ignore: "E501"
+
+      - name: Install pylint and yapf
+        run: |
+          pip install --upgrade pip
+          pip install pylint yapf
+          if test -e requirements.txt; then
+            pip install -r requirements.txt
+          fi
+
+      # This is an opinionate list of disabled warnings.
+      # C0114: missing-module-docstring
+      # C0115: missing-class-docstring
+      # C0116: missing-function-docstring
+      # C0301: line-too-long
+      # R0902: too-many-instance-attributes
+      # R0903: too-few-public-methods
+      # R0911: too-many-returns
+      # R0912: too-many-branches
+      # R0914: too-many-locals
+      # R0915: too-many-statements
+      - name: pylint
+        run: pylint --disable C0114,C0115,C0116,C0301,R0902,R0903,R0911,R0912,R0914,R0915 --jobs $(nproc) $(git ls-files '*.py')
+
+      - name: yapf
+        run: yapf --diff --recursive $GITHUB_WORKSPACE
