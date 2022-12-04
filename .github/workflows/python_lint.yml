@@ -33,7 +33,12 @@ jobs:
             pip install -r requirements.txt
           fi
 
-      # This is an opinionate list of disabled warnings.
+      # This is an opinionated list of disabled warnings.
+      # It potentially makes sense to eventually remove
+      # this in favor of a per-project configuration but
+      # a lot of these will be useless in most projects
+      # that will take advantage of this workflow.
+
       # C0114: missing-module-docstring
       # C0115: missing-class-docstring
       # C0116: missing-function-docstring
