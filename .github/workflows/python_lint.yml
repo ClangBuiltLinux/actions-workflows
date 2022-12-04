@@ -38,14 +38,16 @@ jobs:
       # C0115: missing-class-docstring
       # C0116: missing-function-docstring
       # C0301: line-too-long
+      # C0302: too-many-lines
       # R0902: too-many-instance-attributes
       # R0903: too-few-public-methods
       # R0911: too-many-returns
       # R0912: too-many-branches
+      # R0913: too-many-arguments
       # R0914: too-many-locals
       # R0915: too-many-statements
       - name: pylint
-        run: pylint --disable C0114,C0115,C0116,C0301,R0902,R0903,R0911,R0912,R0914,R0915 --jobs $(nproc) $(git ls-files '*.py')
+        run: pylint --disable C0114,C0115,C0116,C0301,C0302,R0902,R0903,R0911,R0912,R0913,R0914,R0915 --jobs $(nproc) $(git ls-files '*.py')
 
       - name: yapf
         run: yapf --diff --recursive $GITHUB_WORKSPACE
