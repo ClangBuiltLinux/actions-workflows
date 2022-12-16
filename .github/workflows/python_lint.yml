@@ -51,8 +51,9 @@ jobs:
       # R0913: too-many-arguments
       # R0914: too-many-locals
       # R0915: too-many-statements
+      # W1509: subprocess-popen-preexec-fn
       - name: pylint
-        run: pylint --disable C0114,C0115,C0116,C0301,C0302,R0902,R0903,R0911,R0912,R0913,R0914,R0915 --jobs $(nproc) $(git ls-files '*.py')
+        run: pylint --disable C0114,C0115,C0116,C0301,C0302,R0902,R0903,R0911,R0912,R0913,R0914,R0915,W1509 --jobs $(nproc) $(git ls-files '*.py')
 
       - name: yapf
         run: yapf --diff --recursive $GITHUB_WORKSPACE
