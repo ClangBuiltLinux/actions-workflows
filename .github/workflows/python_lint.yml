@@ -30,9 +30,6 @@ jobs:
           else
             echo "ruff=false" >>$GITHUB_ENV
           fi
-          if test -e requirements.txt; then
-            pip install -r requirements.txt
-          fi
 
       - name: ruff
         run: ruff check .
