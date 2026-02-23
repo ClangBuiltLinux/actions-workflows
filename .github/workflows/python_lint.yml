@@ -23,25 +23,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install pylint yapf
-          if git ls-files | grep -Fq ruff.toml; then
-            pip install ruff
-            echo "ruff=true" >>$GITHUB_ENV
-          else
-            echo "ruff=false" >>$GITHUB_ENV
-          fi
+          pip install pylint ruff yapf
 
       - name: ruff
         run: ruff check .
-        if: ${{ env.ruff == 'true' }}
-
-      - name: flake8
-        # ruff can replace flake8 with a proper configuration so do not bother
-        # running this step if ruff has already run.
-        if: ${{ env.ruff == 'false' }}
-        uses: py-actions/flake8@v2
-        with:
-          ignore: "E501"
 
       # This is an opinionated list of disabled warnings.
       # It potentially makes sense to eventually remove
