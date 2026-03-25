@@ -23,8 +23,11 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v7
 
-      - name: ruff
+      - name: ruff check
         run: uvx ruff check .
+
+      - name: ruff format
+        run: uvx ruff format --diff .
 
       # This is an opinionated list of disabled warnings.
       # It potentially makes sense to eventually remove
@@ -48,6 +51,3 @@ jobs:
       # W1509: subprocess-popen-preexec-fn
       - name: pylint
         run: uvx pylint --disable C0114,C0115,C0116,C0301,C0302,R0801,R0902,R0903,R0911,R0912,R0913,R0914,R0915,W1509 --jobs $(nproc) $(git ls-files '*.py')
-
-      - name: yapf
-        run: uvx yapf --diff --recursive $GITHUB_WORKSPACE
