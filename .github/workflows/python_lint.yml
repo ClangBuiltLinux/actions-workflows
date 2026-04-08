@@ -6,6 +6,9 @@ on:
       python_version:
         required: true
         type: string
+      ty:
+        description: 'Run ty on Python code'
+        type: boolean
 
 jobs:
   python_linting:
@@ -28,6 +31,10 @@ jobs:
 
       - name: ruff format
         run: uvx ruff format --diff .
+
+      - name: ty check
+        if:  ${{ inputs.ty }}
+        run: uvx ty check .
 
       # This is an opinionated list of disabled warnings.
       # It potentially makes sense to eventually remove
