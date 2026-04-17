@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ inputs.python_version }}
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v8.0.0
+        uses: astral-sh/setup-uv@v8.1.0
 
       - name: ruff check
         run: uvx ruff check .
