@@ -18,13 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Setup Python
-        uses: actions/setup-python@v7
+      - name: Setup uv and python
+        uses: astral-sh/setup-uv@v10.0.1
         with:
           python-version: ${{ inputs.python_version }}
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v10.0.1
 
       - name: ruff check
         run: uvx ruff check .
