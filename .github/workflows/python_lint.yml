@@ -32,9 +32,10 @@ jobs:
       - name: ruff format
         run: uvx ruff format --diff .
 
+      # TY_UV=scripts for opt-in PEP723 support: https://github.com/astral-sh/ty/issues/691
       - name: ty check
         if:  ${{ inputs.ty }}
-        run: uvx ty check .
+        run: TY_UV=scripts uvx ty check .
 
       # This is an opinionated list of disabled warnings.
       # It potentially makes sense to eventually remove
